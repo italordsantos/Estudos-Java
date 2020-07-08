@@ -5,6 +5,8 @@
  */
 package teste;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author italo
@@ -26,16 +28,35 @@ public class Executa {
     public static void printaTexto(String texto) {
         System.out.println(texto);
     }
-    
+
     public Executa(String texto) {
         System.out.println("Criando uma nova instancia de 'Executa'");
         System.out.println("Texto: " + texto);
     }
 
     public static void main(String[] args) {
-        Gato gato = new Gato("Lili");
+        ArrayList<Animal> animais = new ArrayList<>();
         
-        gato.nome = "Nina";
-        gato.printaNomeDoGato();
+        animais.add(new Animal("Bob"));
+        animais.add(new Animal("Lulu"));
+        animais.add(new Animal("Zhyn"));
+        animais.add(new Animal("Douglas"));
+        animais.add(new Animal("Diogo"));
+        
+        System.out.println(animais.get(4));
+        
+        for (int i = 0; i < 5; i++) {
+            System.out.println(animais.get(i));
+        }
+        System.out.println("");
+        
+        System.out.println("ForEach");
+        for (Animal animal : animais) {
+            System.out.println(animal.getNome());
+        }
+        
+        animais.remove(2);
+        
+        System.out.println(animais.toString());
     }
 }
