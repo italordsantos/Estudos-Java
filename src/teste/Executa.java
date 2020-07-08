@@ -44,7 +44,6 @@ public class Executa {
         animais.add(new Animal("Diogo"));
         
         System.out.println(animais.get(4));
-        
         for (int i = 0; i < 5; i++) {
             System.out.println(animais.get(i));
         }
