@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package teste;
+package aula_07_0605_Outros;
 
 /**
  *
@@ -37,6 +37,9 @@ public class Animal {
         System.out.println("-- emitindo som --");
     }
 
+    /**
+     * Printa na tela do usuário o NOME e o TIPO do animal
+     */
     public void printa() {
         
     }
