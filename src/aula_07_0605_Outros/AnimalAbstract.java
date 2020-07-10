@@ -9,12 +9,14 @@ package aula_07_0605_Outros;
  *
  * @author italo
  */
-public class Animal {
+public abstract class AnimalAbstract {
 
+    private int id;
     private String nome;
     
-    public Animal(String nome) {
+    public AnimalAbstract(int id, String nome) {
         this.nome = nome;
+        this.id = id;
     }
 
     public void printaNome() {
@@ -35,6 +37,14 @@ public class Animal {
     
     public void emitirSom() {
         System.out.println("-- emitindo som --");
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

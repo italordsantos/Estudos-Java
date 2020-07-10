@@ -5,7 +5,7 @@
  */
 package aula_07_08__ArrayList;
 
-import aula_07_0605_Outros.Animal;
+import aula_07_0605_Outros.AnimalAbstract;
 import aula_07_0605_Outros.Cachorro;
 import aula_07_0605_Outros.Ganso;
 import java.util.ArrayList;
@@ -22,8 +22,8 @@ import java.util.ListIterator;
 public class TesteArrayList {
 
     public static void main(String[] args) {
-        ArrayList<Animal> listaDeAnimais = new ArrayList<>();
-        
+        ArrayList<AnimalAbstract> listaDeAnimais = new ArrayList<>();
+        /*
         listaDeAnimais.add(new Cachorro("Lili"));
         listaDeAnimais.add(new Ganso("Lulu"));
         listaDeAnimais.add(new Cachorro("Bili"));
@@ -31,7 +31,7 @@ public class TesteArrayList {
         listaDeAnimais.add(new Cachorro("Astoufo"));
         listaDeAnimais.add(new Ganso("James"));
         listaDeAnimais.add(new Cachorro("Bob"));
-        listaDeAnimais.add(new Ganso("William"));
+        listaDeAnimais.add(new Ganso("William"));*/
 
         System.out.println("-> Lista utilizando for convencional");
         for (int posicao = 0; posicao < listaDeAnimais.size(); posicao++) {
@@ -40,7 +40,7 @@ public class TesteArrayList {
         System.out.println("");
         
         System.out.println("-> Lista utilizando ForEach");
-        for (Animal animal : listaDeAnimais) {
+        for (AnimalAbstract animal : listaDeAnimais) {
             animal.printa();
         }
         
@@ -66,12 +66,12 @@ public class TesteArrayList {
         System.out.println("");
         
         System.out.println("-> Adicionar todos os elementos de uma nova lista");
-        ArrayList<Animal> listaDeAnimaisOutra = new ArrayList<>();
-        
+        ArrayList<AnimalAbstract> listaDeAnimaisOutra = new ArrayList<>();
+        /*
         listaDeAnimaisOutra.add(new Cachorro("Jack"));
         listaDeAnimaisOutra.add(new Ganso("Spark"));
         listaDeAnimaisOutra.add(new Cachorro("Zeze"));
-        listaDeAnimaisOutra.add(new Ganso("Camargo"));
+        listaDeAnimaisOutra.add(new Ganso("Camargo"));*/
         
         listaDeAnimais.addAll(listaDeAnimaisOutra);
         

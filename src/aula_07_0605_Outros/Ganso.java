@@ -9,10 +9,10 @@ package aula_07_0605_Outros;
  *
  * @author italo
  */
-public class Ganso extends Animal {
+public class Ganso extends AnimalAbstract {
 
-    public Ganso(String nome) {
-        super(nome);
+    public Ganso(String nome, int id) {
+        super(id, nome);
     }
 
     public void botarOvo() {
@@ -32,6 +32,10 @@ public class Ganso extends Animal {
     public void printa() {
         System.out.println(getNome() + ", o ganso");
     }
-    
+
+    @Override
+    public String toString() {
+        return "Ganso{" + getNome() + '}';
+    }
     
 }

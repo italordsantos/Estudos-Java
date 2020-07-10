@@ -9,10 +9,10 @@ package aula_07_0605_Outros;
  *
  * @author italo
  */
-public class Cachorro extends Animal{
+public class Cachorro extends AnimalAbstract {
 
-    public Cachorro(String nome) {
-        super(nome);
+    public Cachorro(String nome, int id) {
+        super(id, nome);
     }
 
     @Override
@@ -23,6 +23,11 @@ public class Cachorro extends Animal{
     @Override
     public void printa() {
         System.out.println(getNome() + ", o cachorro");
+    }
+
+    @Override
+    public String toString() {
+        return "Cachorro{" + getNome() + '}';
     }
 
     

@@ -35,13 +35,13 @@ public class Executa {
     }
 
     public static void main(String[] args) {
-        ArrayList<Animal> animais = new ArrayList<>();
-        
-        animais.add(new Animal("Bob"));
-        animais.add(new Animal("Lulu"));
-        animais.add(new Animal("Zhyn"));
-        animais.add(new Animal("Douglas"));
-        animais.add(new Animal("Diogo"));
+        ArrayList<AnimalAbstract> animais = new ArrayList<>();
+
+        animais.add(new Cachorro("Bob", 1));
+        animais.add(new Ganso("Lulu", 2));
+        animais.add(new Ganso("Zhyn", 3));
+        animais.add(new Cachorro("Camargo", 4));
+        animais.add(new Ganso("Diogo", 5));
         
         System.out.println(animais.get(4));
         for (int i = 0; i < 5; i++) {
@@ -50,9 +50,10 @@ public class Executa {
         System.out.println("");
         
         System.out.println("ForEach");
-        for (Animal animal : animais) {
-            System.out.println(animal.getNome());
+        for (AnimalAbstract animal : animais) {
+            animal.printa();
         }
+        System.out.println("");
         
         animais.remove(2);
         
