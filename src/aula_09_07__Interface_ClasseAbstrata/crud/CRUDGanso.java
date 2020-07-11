@@ -6,27 +6,25 @@
 package aula_09_07__Interface_ClasseAbstrata.crud;
 
 import aula_07_0605_Outros.AnimalAbstract;
-import aula_07_0605_Outros.Cachorro;
+import aula_07_0605_Outros.Ganso;
 import java.util.ArrayList;
 
 /**
  *
  * @author italo
  */
-public class CRUD implements InterfaceCRUD {
+public class CRUDGanso {
 
-    private final ArrayList<AnimalAbstract> listaAnimal = new ArrayList<>();
+    private final ArrayList<Ganso> listaCachorros = new ArrayList<>();
     
-    @Override
-    public boolean cadastrar(AnimalAbstract animal) {
-        return listaAnimal.add(animal);
+    public boolean cadastrar(Ganso cachorro) {
+        return listaCachorros.add(cachorro);
     }
-
-    @Override
+    
     public boolean alterar(int id, String nome) {
         boolean alterou = false;
         
-        for (AnimalAbstract a : listaAnimal) {
+        for (AnimalAbstract a : listaCachorros) {
             if (id == a.getId()) {
                 a.setNome(nome);
                 alterou = true;
@@ -37,11 +35,10 @@ public class CRUD implements InterfaceCRUD {
         return alterou;
     }
 
-    @Override
     public boolean deletar(int id) {
-         for (int i = 0; i < listaAnimal.size(); i++) {
-             if (listaAnimal.get(i).getId() == id) {
-                 listaAnimal.remove(i);
+         for (int i = 0; i < listaCachorros.size(); i++) {
+             if (listaCachorros.get(i).getId() == id) {
+                 listaCachorros.remove(i);
                  return true;
              }
          }
@@ -49,19 +46,17 @@ public class CRUD implements InterfaceCRUD {
         return false;
     }
 
-    @Override
     public AnimalAbstract pesquisar(String nome) {
-        for (AnimalAbstract animal : listaAnimal) {
+        for (AnimalAbstract animal : listaCachorros) {
             if (animal.getNome().equals(nome)) {
                 return animal;
             }
         }
-        return new Cachorro("-1", -1);
+        return new Ganso("-1", -1);
     }
 
-    @Override
-    public ArrayList<AnimalAbstract> listarAnimais() {
-        return listaAnimal;
+    public ArrayList<Ganso> listarAnimais() {
+        return listaCachorros;
     }
     
     

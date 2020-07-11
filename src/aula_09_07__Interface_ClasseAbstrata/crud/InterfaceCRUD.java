@@ -6,6 +6,8 @@
 package aula_09_07__Interface_ClasseAbstrata.crud;
 
 import aula_07_0605_Outros.AnimalAbstract;
+import aula_07_0605_Outros.Cachorro;
+import aula_07_0605_Outros.Ganso;
 import java.util.ArrayList;
 
 /**
@@ -32,17 +34,18 @@ public interface InterfaceCRUD {
     /**
      * Alterar as informações do animal
      * 
-     * @param animal animal a ser alterado as informações
+     * @param id id do animal
+     * @param nome novo nome do animal
      * @return verdadeira caso seja alterado com sucesso, e falso o oposto
      */
-    boolean alterar(AnimalAbstract animal);
+    boolean alterar(int id, String nome);
     
     /**
      * 
-     * @param animal
+     * @param id id do animal que será removido da lista
      * @return 
      */
-    boolean deletar(AnimalAbstract animal);
+    boolean deletar(int id);
     
     /**
      * 

@@ -35,7 +35,7 @@ public class Ganso extends AnimalAbstract {
 
     @Override
     public String toString() {
-        return "Ganso{" + getNome() + '}';
+        return "Ganso{" + getId() + "::" + getNome() + '}';
     }
     
 }

@@ -15,6 +15,10 @@ public class Cachorro extends AnimalAbstract {
         super(id, nome);
     }
 
+    public void fazBuracos() {
+        System.out.println("-- fazendo buraco --");
+    }
+    
     @Override
     public void emitirSom() {
         System.out.println("-- latindo --");
@@ -27,7 +31,7 @@ public class Cachorro extends AnimalAbstract {
 
     @Override
     public String toString() {
-        return "Cachorro{" + getNome() + '}';
+        return "Cachorro{" + getId() + "::" + getNome() + '}';
     }
 
     
