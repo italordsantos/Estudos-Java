@@ -57,7 +57,7 @@ public class Teste {
         System.out.println("");
 
         System.out.println("-- pesquisar por nome --");
-        System.out.println(crudCachorro.pesquisar("Zhyn").toString());
+        System.out.println(crudCachorro.pesquisarPorNome("Zhyn").toString());
         System.out.println("");
         
         for (AnimalAbstract animal : crudCachorro.listarAnimais()) {

@@ -5,7 +5,6 @@
  */
 package aula_09_07__Interface_ClasseAbstrata.crud;
 
-import aula_07_0605_Outros.AnimalAbstract;
 import aula_07_0605_Outros.Cachorro;
 import java.util.ArrayList;
 
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 public class CRUDCachorro {
 
     private final ArrayList<Cachorro> listaCachorros = new ArrayList<>();
+    private ArrayList<Cachorro> listaCachorrosO;
     
     public String cadastrar(Cachorro cachorro) {
         if (temEsteCachorroID(cachorro.getId())) {
@@ -31,7 +31,7 @@ public class CRUDCachorro {
     public boolean alterar(int id, String nome) {
         boolean alterou = false;
         
-        for (AnimalAbstract a : listaCachorros) {
+        for (Cachorro a : listaCachorros) {
             if (id == a.getId()) {
                 a.setNome(nome);
                 alterou = true;
@@ -53,9 +53,28 @@ public class CRUDCachorro {
         return false;
     }
 
-    public AnimalAbstract pesquisar(String nome) {
-        for (AnimalAbstract animal : listaCachorros) {
-            if (animal.getNome().equals(nome)) {
+    public Cachorro pesquisarPorNome(String nome) {
+        for (Cachorro animal : listaCachorros) {
+            if (animal.getNome().equalsIgnoreCase(nome)) {
+                return animal;
+            }
+        }
+        return new Cachorro("-1", -1);
+    }
+    
+    public ArrayList<Cachorro> pesquisarPorNomeA(String nome) {
+        listaCachorrosO = new ArrayList<>();
+        for (Cachorro animal : listaCachorros) {
+            if (animal.getNome().contains(nome)) {
+                listaCachorrosO.add(animal);
+            }
+        }
+        return listaCachorrosO;
+    }
+    
+    public Cachorro pesquisarPorId(int id) {
+        for (Cachorro animal : listaCachorros) {
+            if (animal.getId() == id) {
                 return animal;
             }
         }
