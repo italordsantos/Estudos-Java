@@ -8,6 +8,7 @@ package aula_10_07__PrimeiraTela;
 import aula_07_0605_Outros.Cachorro;
 import aula_09_07__Interface_ClasseAbstrata.crud.CRUDCachorro;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 public class TelaCachorro extends javax.swing.JFrame {
 
     private final CRUDCachorro controleCachorro = new CRUDCachorro();
+    private ArrayList<Cachorro> listaCachorro;
     private DefaultListModel<String> listModel;
     private Cachorro cachorro;
     
@@ -32,6 +34,15 @@ public class TelaCachorro extends javax.swing.JFrame {
     
     private void deletar() {
         int index = jlistAnimais.getSelectedIndex();
+        
+        Cachorro doguinhoDeletar = listaCachorro.get(index);
+        
+        if (controleCachorro.deletar(doguinhoDeletar.getId())) {
+            JOptionPane.showMessageDialog(this, "O " + doguinhoDeletar.getNome() + " foi deletado com sucesso :'(");
+            atualizaLista();
+        } else {
+            JOptionPane.showMessageDialog(this, "Não foi possível deletar a (o) " + doguinhoDeletar.getNome() + " :)");
+        }
     }
 
     private void pesquisar() {
@@ -40,15 +51,14 @@ public class TelaCachorro extends javax.swing.JFrame {
             
             listModel = new DefaultListModel<>();
             
-            for (Cachorro c : controleCachorro.pesquisarPorNomeA(nomeCachorro)) {
+            for (Cachorro c : controleCachorro.searchByContainsString(nomeCachorro)) {
                 listModel.addElement(c.toString());
             }
-
+            
             jlistAnimaisPesquisar.setModel(listModel);
+            
         } else {
             int idCachorro = Integer.parseInt(jtfNomePesquisar.getText());
-            
-            listModel = new DefaultListModel<>();
             
             listModel.addElement(controleCachorro.pesquisarPorId(idCachorro).toString());
             
@@ -93,12 +103,14 @@ public class TelaCachorro extends javax.swing.JFrame {
     }
     
     private void atualizaLista() {
-        DefaultListModel<String> lista = new DefaultListModel<>();
-        for (Cachorro cachorro : controleCachorro.listarAnimais()) {
-            lista.addElement(cachorro.toString());
+        listModel = new DefaultListModel<>();
+        listaCachorro = controleCachorro.listarTodosOsAnimais();
+        
+        for (Cachorro cachorro : listaCachorro) {
+            listModel.addElement(cachorro.toString());
         }
         
-        jlistAnimais.setModel(lista);
+        jlistAnimais.setModel(listModel);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -289,7 +301,7 @@ public class TelaCachorro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jsId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jsId, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -352,16 +364,13 @@ public class TelaCachorro extends javax.swing.JFrame {
 
     private void jlistAnimaisValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlistAnimaisValueChanged
         // TODO add your handling code here:
-        System.out.println(evt.getFirstIndex());
-        System.out.println("--list change");
-        System.out.println("Index selecionado: " + (jlistAnimais.getSelectedIndex()));
-        System.out.println("Conteudo selecionado: " + (jlistAnimais.getSelectedValue()));
-        System.out.println("");
     }//GEN-LAST:event_jlistAnimaisValueChanged
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        if (!jlistAnimais.isSelectionEmpty()) {
+        if (jlistAnimais.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione ao menos uma linha da lista");
+        } else {
             deletar();
         }
     }//GEN-LAST:event_btnExcluirActionPerformed

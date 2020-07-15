@@ -25,7 +25,7 @@ public class Teste {
     public Teste() {
 
         System.out.println("-- listar inicial --");
-        System.out.println(crudCachorro.listarAnimais().toString());
+        System.out.println(crudCachorro.listarTodosOsAnimais().toString());
         System.out.println(crudGanso.listarAnimais().toString());
         System.out.println("");
 
@@ -40,27 +40,27 @@ public class Teste {
         crudGanso.cadastrar(new Ganso("Camargo", 6));
         crudGanso.cadastrar(new Ganso("Godofredo", 8));
         crudGanso.cadastrar(new Ganso("Jorge", 10));
-        System.out.println(crudCachorro.listarAnimais().toString());
+        System.out.println(crudCachorro.listarTodosOsAnimais().toString());
         System.out.println(crudGanso.listarAnimais().toString());
         System.out.println("");
 
         System.out.println("-- alterar --");
-        System.out.println(crudCachorro.listarAnimais().toString());
+        System.out.println(crudCachorro.listarTodosOsAnimais().toString());
         crudCachorro.alterar(2, "Zeca");
-        System.out.println(crudCachorro.listarAnimais().toString());
+        System.out.println(crudCachorro.listarTodosOsAnimais().toString());
         System.out.println("");
 
         System.out.println("-- deletar --");
-        System.out.println(crudCachorro.listarAnimais().toString());
+        System.out.println(crudCachorro.listarTodosOsAnimais().toString());
         crudCachorro.deletar(5);
-        System.out.println(crudCachorro.listarAnimais().toString());
+        System.out.println(crudCachorro.listarTodosOsAnimais().toString());
         System.out.println("");
 
         System.out.println("-- pesquisar por nome --");
         System.out.println(crudCachorro.pesquisarPorNome("Zhyn").toString());
         System.out.println("");
         
-        for (AnimalAbstract animal : crudCachorro.listarAnimais()) {
+        for (AnimalAbstract animal : crudCachorro.listarTodosOsAnimais()) {
             animal.printa();
             animal.correr();
             animal.emitirSom();

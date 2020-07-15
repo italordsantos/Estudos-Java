@@ -27,6 +27,10 @@ public abstract class AnimalAbstract {
         System.out.println("-- correndo atrás do carteiro --");
     }
     
+    /**
+     * 
+     * @return retorna o nome do animal
+     */
     public String getNome() {
         return nome;
     }

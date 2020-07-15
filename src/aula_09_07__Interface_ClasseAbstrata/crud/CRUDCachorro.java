@@ -10,70 +10,97 @@ import java.util.ArrayList;
 
 /**
  *
+ * C create R read U update D delete
+ *
  * @author italo
  */
 public class CRUDCachorro {
 
-    private final ArrayList<Cachorro> listaCachorros = new ArrayList<>();
-    private ArrayList<Cachorro> listaCachorrosO;
-    
+    /**
+     * Banco de dados da nossa aplicação de teste
+     */
+    private final ArrayList<Cachorro> listaCachorrosBD = new ArrayList<>();
+
+    /**
+     * Lista para usar como quiser
+     */
+    private ArrayList<Cachorro> listaCachorrosAuxiliar;
+
+    /**
+     * Cadastra o cachorro no banco de dados
+     *
+     * @param cachorro cachorro a ser cadastrado
+     * @return retorna VAZIO caso cadastrado com sucesso. Se houver um cachorro
+     * com o, IGNORECASE, nome, ou exato id, o mesmo não será cadastrado e
+     * retornará uma mensagem contendo o motivo.
+     */
     public String cadastrar(Cachorro cachorro) {
         if (temEsteCachorroID(cachorro.getId())) {
             return "Já existe um cachorro com este ID";
         } else if (temEsteCachorroNome(cachorro.getNome())) {
             return "Já existe um cachorro com este nome";
         } else {
-            listaCachorros.add(cachorro);
+            listaCachorrosBD.add(cachorro);
             return "";
         }
     }
-    
+
     public boolean alterar(int id, String nome) {
         boolean alterou = false;
-        
-        for (Cachorro a : listaCachorros) {
+
+        for (Cachorro a : listaCachorrosBD) {
             if (id == a.getId()) {
                 a.setNome(nome);
                 alterou = true;
                 break;
             }
         }
-        
+
         return alterou;
     }
 
+    /**
+     * Deletar o cachorro do banco
+     * 
+     * @param id id do animal que será deletado
+     * @return retorna verdadeiro caso deletado com sucesso, e falto caso não
+     * encontre o animal que foi passo o id
+     */
     public boolean deletar(int id) {
-         for (int i = 0; i < listaCachorros.size(); i++) {
-             if (listaCachorros.get(i).getId() == id) {
-                 listaCachorros.remove(i);
-                 return true;
-             }
-         }
-        
+        for (int i = 0; i < listaCachorrosBD.size(); i++) {
+            if (listaCachorrosBD.get(i).getId() == id) {
+                listaCachorrosBD.remove(i);
+                return true;
+            }
+        }
+
         return false;
     }
 
     public Cachorro pesquisarPorNome(String nome) {
-        for (Cachorro animal : listaCachorros) {
+        for (Cachorro animal : listaCachorrosBD) {
             if (animal.getNome().equalsIgnoreCase(nome)) {
                 return animal;
             }
         }
         return new Cachorro("-1", -1);
     }
-    
-    public ArrayList<Cachorro> pesquisarPorNomeA(String nome) {
-        listaCachorrosO = new ArrayList<>();
-        for (Cachorro animal : listaCachorros) {
+
+    public ArrayList<Cachorro> searchByContainsString(String nome) {
+        listaCachorrosAuxiliar = new ArrayList<>();
+        
+        for (Cachorro animal : listaCachorrosBD) {
             if (animal.getNome().contains(nome)) {
-                listaCachorrosO.add(animal);
+                listaCachorrosAuxiliar.add(animal);
+                animal.printa();
             }
         }
-        return listaCachorrosO;
+
+        return listaCachorrosAuxiliar;
     }
-    
+
     public Cachorro pesquisarPorId(int id) {
-        for (Cachorro animal : listaCachorros) {
+        for (Cachorro animal : listaCachorrosBD) {
             if (animal.getId() == id) {
                 return animal;
             }
@@ -81,27 +108,27 @@ public class CRUDCachorro {
         return new Cachorro("-1", -1);
     }
 
-    public ArrayList<Cachorro> listarAnimais() {
-        return listaCachorros;
+    public ArrayList<Cachorro> listarTodosOsAnimais() {
+        return listaCachorrosBD;
     }
-    
+
     public boolean temEsteCachorroID(int id) {
-        for (Cachorro cachorro : listaCachorros) {
+        for (Cachorro cachorro : listaCachorrosBD) {
             if (id == cachorro.getId()) {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     public boolean temEsteCachorroNome(String nome) {
-        for (Cachorro cachorro : listaCachorros) {
-            if (nome.equals(cachorro.getNome())) {
+        for (Cachorro cachorro : listaCachorrosBD) {
+            if (nome.equalsIgnoreCase(cachorro.getNome())) {
                 return true;
             }
         }
-        
+
         return false;
     }
 }
