@@ -30,6 +30,23 @@ public class TelaCachorro extends javax.swing.JFrame {
         initComponents();
         preCadastrar();
         atualizaLista();
+        
+        //String mensagem = JOptionPane.showInputDialog("Digite uma mensagem");
+        
+        //JOptionPane.showMessageDialog(this, mensagem);
+    }
+    
+    private void alterar() {
+        String novoNomeDoAnimal = JOptionPane.showInputDialog("Digite um novo nome para o animal:");
+        
+        Cachorro doguinhoAlterar = listaCachorro.get(jlistAnimais.getSelectedIndex());
+        
+        if (controleCachorro.alterar(doguinhoAlterar.getId(), novoNomeDoAnimal)) {
+            JOptionPane.showMessageDialog(this, "Alterado com sucesso");
+            atualizaLista();
+        } else {
+            JOptionPane.showMessageDialog(this, "Não foi possível alterar o nome do doguinho");
+        }
     }
     
     private void deletar() {
@@ -340,6 +357,11 @@ public class TelaCachorro extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
+        if (jlistAnimais.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione ao menos uma linha da lista");
+        } else {
+            alterar();
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void jrbNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNomeActionPerformed

@@ -45,6 +45,13 @@ public class CRUDCachorro {
         }
     }
 
+    /**
+     * Altera o nome do cachorro
+     * 
+     * @param id id do cachorro que vamos alterar o nome, serve para ele pesquisar, um identificador.
+     * @param nome novo nome que o cachorro terá
+     * @return retorna verdadeiro caso seja alterado com sucesso
+     */
     public boolean alterar(int id, String nome) {
         boolean alterou = false;
 
