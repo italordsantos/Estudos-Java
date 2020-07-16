@@ -7,6 +7,7 @@ package aula_09_07__Interface_ClasseAbstrata.crud;
 
 import aula_07_0605_Outros.Cachorro;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -90,14 +91,15 @@ public class CRUDCachorro {
                 return animal;
             }
         }
-        return new Cachorro("-1", -1);
+        return null;
     }
 
     public ArrayList<Cachorro> searchByContainsString(String nome) {
         listaCachorrosAuxiliar = new ArrayList<>();
         
         for (Cachorro animal : listaCachorrosBD) {
-            if (animal.getNome().contains(nome)) {
+            if (animal.getNome().toLowerCase().contains(nome) ||
+                animal.getNome().toUpperCase().contains(nome)) {
                 listaCachorrosAuxiliar.add(animal);
                 animal.printa();
             }
@@ -105,6 +107,8 @@ public class CRUDCachorro {
 
         return listaCachorrosAuxiliar;
     }
+    
+    
 
     public Cachorro pesquisarPorId(int id) {
         for (Cachorro animal : listaCachorrosBD) {
@@ -112,7 +116,7 @@ public class CRUDCachorro {
                 return animal;
             }
         }
-        return new Cachorro("-1", -1);
+        return null;
     }
 
     public ArrayList<Cachorro> listarTodosOsAnimais() {
