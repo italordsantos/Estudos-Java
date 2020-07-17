@@ -35,7 +35,7 @@ public class Executa {
     }
 
     public static void main(String[] args) {
-        ArrayList<AnimalAbstract> animais = new ArrayList<>();
+        /*ArrayList<AnimalAbstract> animais = new ArrayList<>();
 
         animais.add(new Cachorro("Bob", 1));
         animais.add(new Ganso("Lulu", 2));
@@ -57,6 +57,6 @@ public class Executa {
         
         animais.remove(2);
         
-        System.out.println(animais.toString());
+        System.out.println(animais.toString());*/
     }
 }

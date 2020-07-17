@@ -56,7 +56,7 @@ public class CRUD implements InterfaceCRUD {
                 return animal;
             }
         }
-        return new Cachorro("-1", -1);
+        return null;
     }
 
     @Override

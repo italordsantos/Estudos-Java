@@ -32,9 +32,6 @@ public class TelaCachorro extends javax.swing.JFrame {
         initComponents();
         preCadastrar();
         atualiza();
-
-        //String mensagem = JOptionPane.showInputDialog("Digite uma mensagem");
-        //JOptionPane.showMessageDialog(this, mensagem);
     }
 
     private boolean validarEntradaPesquisar(char caractere) {

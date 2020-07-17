@@ -24,7 +24,7 @@ public class Teste {
 
     public Teste() {
 
-        System.out.println("-- listar inicial --");
+        /*System.out.println("-- listar inicial --");
         System.out.println(crudCachorro.listarTodosOsAnimais().toString());
         System.out.println(crudGanso.listarAnimais().toString());
         System.out.println("");
@@ -65,7 +65,7 @@ public class Teste {
             animal.correr();
             animal.emitirSom();
             System.out.println("");
-        }
+        }*/
     }
     
 }
