@@ -7,6 +7,7 @@ package aula_10_07__PrimeiraTela;
 
 import aula_07_0605_Outros.Cachorro;
 import aula_09_07__Interface_ClasseAbstrata.crud.CRUDCachorro;
+import aula_09_07__Interface_ClasseAbstrata.crud.Raca;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -23,7 +24,7 @@ public class TelaCachorro extends javax.swing.JFrame {
     private ArrayList<Cachorro> listaCachorro;
     private DefaultListModel<String> listModel;
     private Cachorro cachorro;
-    
+
     /**
      * Creates new form TelaCachorro
      */
@@ -31,22 +32,21 @@ public class TelaCachorro extends javax.swing.JFrame {
         initComponents();
         preCadastrar();
         atualiza();
-        
+
         //String mensagem = JOptionPane.showInputDialog("Digite uma mensagem");
-        
         //JOptionPane.showMessageDialog(this, mensagem);
     }
-    
+
     private boolean validarEntradaPesquisar(char caractere) {
-        return jrbNome.isSelected() ? (caractere + "").matches("[a-zA-Z]") :
-                (caractere + "").matches("[0-9]");
+        return jrbNome.isSelected() ? (caractere + "").matches("[a-zA-Z]")
+                : (caractere + "").matches("[0-9]");
     }
-    
+
     private void alterar() {
         String novoNomeDoAnimal = JOptionPane.showInputDialog("Digite um novo nome para o animal:");
-        
+
         Cachorro doguinhoAlterar = listaCachorro.get(jlistAnimais.getSelectedIndex());
-        
+
         if (controleCachorro.alterar(doguinhoAlterar.getId(), novoNomeDoAnimal)) {
             JOptionPane.showMessageDialog(this, "Alterado com sucesso");
             atualiza();
@@ -54,12 +54,12 @@ public class TelaCachorro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Não foi possível alterar o nome do doguinho");
         }
     }
-    
+
     private void deletar() {
         int index = jlistAnimais.getSelectedIndex();
-        
+
         Cachorro doguinhoDeletar = listaCachorro.get(index);
-        
+
         if (controleCachorro.deletar(doguinhoDeletar.getId())) {
             JOptionPane.showMessageDialog(this, "O " + doguinhoDeletar.getNome() + " foi deletado com sucesso :'(");
             atualiza();
@@ -71,57 +71,59 @@ public class TelaCachorro extends javax.swing.JFrame {
     private void pesquisar() {
         if (jrbNome.isSelected()) {
             String nomeCachorro = jtfNomePesquisar.getText();
-            
+
             listModel = new DefaultListModel<>();
-            
+
             for (Cachorro c : controleCachorro.searchByContainsString(nomeCachorro)) {
                 listModel.addElement(c.toString());
             }
-            
+
             jlistAnimaisPesquisar.setModel(listModel);
-            
+
         } else {
             int idCachorro = Integer.parseInt(jtfNomePesquisar.getText());
-            
+
             listModel = new DefaultListModel<>();
-            
+
             cachorro = controleCachorro.pesquisarPorId(idCachorro);
-            
+
             if (cachorro == null) {
                 listModel.addElement("Não existe este ID");
-                
+
             } else {
                 listModel.addElement(cachorro.toString());
             }
-            
+
             jlistAnimaisPesquisar.setModel(listModel);
         }
     }
-    
+
     private void preCadastrar() {
-        controleCachorro.cadastrar(new Cachorro("Fred",     20));
-        controleCachorro.cadastrar(new Cachorro("Lulu",     21));
-        controleCachorro.cadastrar(new Cachorro("Zhyn",     22));
-        controleCachorro.cadastrar(new Cachorro("Spok",     23));
-        controleCachorro.cadastrar(new Cachorro("Bili",     24));
-        controleCachorro.cadastrar(new Cachorro("Bob" ,     25));
-        controleCachorro.cadastrar(new Cachorro("Zezé",     26));
-        controleCachorro.cadastrar(new Cachorro("Camargo",  27));
-        controleCachorro.cadastrar(new Cachorro("Betoven",  28));
-        controleCachorro.cadastrar(new Cachorro("Belinha",  29));
-        controleCachorro.cadastrar(new Cachorro("Totó",     30));
-        controleCachorro.cadastrar(new Cachorro("Tito",     31));
-        controleCachorro.cadastrar(new Cachorro("Santana",  32));
-        controleCachorro.cadastrar(new Cachorro("Carlos",   33));
-        controleCachorro.cadastrar(new Cachorro("Neguinho", 34));
-        controleCachorro.cadastrar(new Cachorro("Hércules", 35));
+        controleCachorro.cadastrar(new Cachorro("Fred", 20, Raca.CARAMELO, "", 1, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Lulu", 21, Raca.CARAMELO, "", 2, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Zhyn", 22, Raca.CARAMELO, "", 3, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Spok", 23, Raca.CARAMELO, "", 4, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Bili", 24, Raca.PINSCHER, "", 5, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Bob", 25, Raca.PASTOR_ALEMAO, "", 6, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Zezé", 26, Raca.PASTOR_ALEMAO, "", 7, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Camargo", 27, Raca.PASTOR_ALEMAO, "", 8, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Betoven", 28, Raca.PASTOR_ALEMAO, "", 9, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Belinha", 29, Raca.PASTOR_ALEMAO, "", 0, 'f'));
+        controleCachorro.cadastrar(new Cachorro("Totó", 30, Raca.PASTOR_ALEMAO, "", 8, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Tito", 31, Raca.PASTOR_ALEMAO, "", 7, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Santana", 32, Raca.PINSCHER, "", 6, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Carlos", 33, Raca.CHOW_CHOW, "", 5, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Neguinho", 34, Raca.CHIHUAHUHUAHUAHUA, "", 4, 'M'));
+        controleCachorro.cadastrar(new Cachorro("Hércules", 35, Raca.CARAMELO, "", 3, 'M'));
     }
-    
+
     private void cadastrar() {
-        cachorro = new Cachorro(jtfNome.getText(), (int)jsId.getValue());
-        String message = controleCachorro.cadastrar(cachorro);
-        
+        cachorro = new Cachorro(jtfNome.getText(), (int) jsId.getValue(), Raca.CARAMELO, "", 5, 'M');
+
+        String message = controleCachorro.validarDados(cachorro);
+
         if (message.isEmpty()) {
+            controleCachorro.cadastrar(cachorro);
             atualiza();
             limpaCampos();
         } else {
@@ -131,38 +133,38 @@ public class TelaCachorro extends javax.swing.JFrame {
 
     private void limpaCampos() {
         jtfNome.setText("");
-        jsId.setValue((int)jsId.getValue() + 1);
+        jsId.setValue((int) jsId.getValue() + 1);
     }
-    
+
     private void atualiza() {
         atualizaLista();
         atualizaTabela();
     }
-    
+
     private void atualizaLista() {
         listModel = new DefaultListModel<>();
         listaCachorro = controleCachorro.listarTodosOsAnimais();
-        
+
         for (Cachorro cachorro : listaCachorro) {
             listModel.addElement(cachorro.toString());
         }
-        
+
         jlistAnimais.setModel(listModel);
     }
-    
+
     private void atualizaTabela() {
         DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
 
         tableModel.setRowCount(0);
-        
+
         for (Cachorro cachorro : listaCachorro) {
             tableModel.addRow(new Object[]{cachorro.getId(), cachorro.getNome()});
         }
-        
+
         jTable1.setModel(tableModel);
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,7 +174,8 @@ public class TelaCachorro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        btPesquisar = new javax.swing.ButtonGroup();
+        btSexo = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jtfNome = new javax.swing.JTextField();
@@ -194,6 +197,15 @@ public class TelaCachorro extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnPesquisar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jtfNome1 = new javax.swing.JTextField();
+        jsId1 = new javax.swing.JSpinner();
+        jLabel6 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -205,12 +217,19 @@ public class TelaCachorro extends javax.swing.JFrame {
         jLabel2.setText("Cachorro");
 
         jtfNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtfNome.setToolTipText("Nome do cachorro");
+        jtfNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNomeKeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Nome:");
+        jLabel3.setText("Nome do cachorro:");
 
         jsId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jsId.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsId.setToolTipText("identificador");
 
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -262,7 +281,7 @@ public class TelaCachorro extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Tabela", jScrollPane2);
 
-        buttonGroup1.add(jrbNome);
+        btPesquisar.add(jrbNome);
         jrbNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jrbNome.setSelected(true);
         jrbNome.setText("nome");
@@ -277,7 +296,7 @@ public class TelaCachorro extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(jrbId);
+        btPesquisar.add(jrbId);
         jrbId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jrbId.setText("id");
         jrbId.addActionListener(new java.awt.event.ActionListener() {
@@ -290,9 +309,6 @@ public class TelaCachorro extends javax.swing.JFrame {
         jtfNomePesquisar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtfNomePesquisar.setToolTipText("Pressione enter para pesquisar");
         jtfNomePesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtfNomePesquisarKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfNomePesquisarKeyReleased(evt);
             }
@@ -333,7 +349,7 @@ public class TelaCachorro extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbNome)
                     .addComponent(jrbId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -383,26 +399,80 @@ public class TelaCachorro extends javax.swing.JFrame {
         });
         jToolBar1.add(btnPesquisar);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Raça:");
+
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setToolTipText("raça do animal");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Nome do dono:");
+
+        jtfNome1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtfNome1.setToolTipText("Nome do dono");
+        jtfNome1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNome1KeyTyped(evt);
+            }
+        });
+
+        jsId1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jsId1.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
+        jsId1.setToolTipText("Anos");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Idade:");
+
+        btSexo.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Masculino");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Sexo:");
+
+        btSexo.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButton2.setText("Feminino");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(181, 181, 181))
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsId, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jRadioButton1)
+                        .addGap(31, 31, 31)
+                        .addComponent(jRadioButton2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                        .addComponent(jsId, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jtfNome1))
+                    .addComponent(jsId1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,10 +487,27 @@ public class TelaCachorro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jtfNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jsId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jLabel7)
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Lista");
@@ -450,10 +537,11 @@ public class TelaCachorro extends javax.swing.JFrame {
 
     private void jtfNomePesquisarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNomePesquisarKeyTyped
         // TODO add your handling code here:
-        
+        System.out.println(evt.getKeyChar());
+
         if (validarEntradaPesquisar(evt.getKeyChar())) {
             if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-                pesquisar();
+                System.out.println(evt.getKeyChar());
             }
         } else {
             evt.consume();
@@ -488,22 +576,31 @@ public class TelaCachorro extends javax.swing.JFrame {
 
     private void jtfNomePesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNomePesquisarKeyReleased
         // TODO add your handling code here:
-        pesquisar();
+        if (!jtfNomePesquisar.getText().isEmpty()) {
+            pesquisar();
+        }
     }//GEN-LAST:event_jtfNomePesquisarKeyReleased
-
-    private void jtfNomePesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNomePesquisarKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNomePesquisarKeyPressed
 
     private void jrbNomeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrbNomeStateChanged
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jrbNomeStateChanged
 
     private void jrbIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbIdActionPerformed
         // TODO add your handling code here:
         jtfNomePesquisar.setText("");
     }//GEN-LAST:event_jrbIdActionPerformed
+
+    private void jtfNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNomeKeyTyped
+        // TODO add your handling code here:
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            cadastrar();
+        }
+    }//GEN-LAST:event_jtfNomeKeyTyped
+
+    private void jtfNome1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNome1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNome1KeyTyped
 
     /**
      * @param args the command line arguments
@@ -541,15 +638,23 @@ public class TelaCachorro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btPesquisar;
+    private javax.swing.ButtonGroup btSexo;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -561,7 +666,9 @@ public class TelaCachorro extends javax.swing.JFrame {
     private javax.swing.JRadioButton jrbId;
     private javax.swing.JRadioButton jrbNome;
     private javax.swing.JSpinner jsId;
+    private javax.swing.JSpinner jsId1;
     private javax.swing.JTextField jtfNome;
+    private javax.swing.JTextField jtfNome1;
     private javax.swing.JTextField jtfNomePesquisar;
     // End of variables declaration//GEN-END:variables
 }

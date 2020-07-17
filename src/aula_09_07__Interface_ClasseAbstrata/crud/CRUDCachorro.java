@@ -35,21 +35,18 @@ public class CRUDCachorro {
      * com o, IGNORECASE, nome, ou exato id, o mesmo não será cadastrado e
      * retornará uma mensagem contendo o motivo.
      */
-    public String cadastrar(Cachorro cachorro) {
-        if (temEsteCachorroID(cachorro.getId())) {
-            return "Já existe um cachorro com este ID";
-        } else if (temEsteCachorroNome(cachorro.getNome())) {
-            return "Já existe um cachorro com este nome";
-        } else {
-            listaCachorrosBD.add(cachorro);
-            return "";
+    public boolean cadastrar(Cachorro cachorro) {
+        if (validarDados(cachorro).isEmpty()) {
+            return listaCachorrosBD.add(cachorro);
         }
+        return false;
     }
 
     /**
      * Altera o nome do cachorro
-     * 
-     * @param id id do cachorro que vamos alterar o nome, serve para ele pesquisar, um identificador.
+     *
+     * @param id id do cachorro que vamos alterar o nome, serve para ele
+     * pesquisar, um identificador.
      * @param nome novo nome que o cachorro terá
      * @return retorna verdadeiro caso seja alterado com sucesso
      */
@@ -69,7 +66,7 @@ public class CRUDCachorro {
 
     /**
      * Deletar o cachorro do banco
-     * 
+     *
      * @param id id do animal que será deletado
      * @return retorna verdadeiro caso deletado com sucesso, e falto caso não
      * encontre o animal que foi passo o id
@@ -96,10 +93,10 @@ public class CRUDCachorro {
 
     public ArrayList<Cachorro> searchByContainsString(String nome) {
         listaCachorrosAuxiliar = new ArrayList<>();
-        
+
         for (Cachorro animal : listaCachorrosBD) {
-            if (animal.getNome().toLowerCase().contains(nome) ||
-                animal.getNome().toUpperCase().contains(nome)) {
+            if (animal.getNome().toLowerCase().contains(nome)
+                    || animal.getNome().toUpperCase().contains(nome)) {
                 listaCachorrosAuxiliar.add(animal);
                 animal.printa();
             }
@@ -107,8 +104,6 @@ public class CRUDCachorro {
 
         return listaCachorrosAuxiliar;
     }
-    
-    
 
     public Cachorro pesquisarPorId(int id) {
         for (Cachorro animal : listaCachorrosBD) {
@@ -141,5 +136,30 @@ public class CRUDCachorro {
         }
 
         return false;
+    }
+
+    /**
+     *
+     * @param cachorro
+     * @return VAZIO caso todos os dados sejam válidos
+     */
+    public String validarDados(Cachorro cachorro) {
+        System.out.println("-- entrou no validar");
+
+        if (cachorro.getNome().isEmpty()) {
+            return "Insira um nome para o cachorro";
+
+        } else if (cachorro.getNome().matches("a-zA-Z")) {
+            return "O nome do animal contém caracteres inválidos";
+
+        } else if (temEsteCachorroID(cachorro.getId())) {
+            return "Já existe um cachorro com este ID";
+
+        } else if (temEsteCachorroNome(cachorro.getNome())) {
+            return "Já existe um cachorro com este nome";
+
+        }
+        return "";
+
     }
 }
