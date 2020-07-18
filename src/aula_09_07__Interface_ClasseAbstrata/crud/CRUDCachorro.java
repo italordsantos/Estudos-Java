@@ -6,6 +6,7 @@
 package aula_09_07__Interface_ClasseAbstrata.crud;
 
 import aula_07_0605_Outros.Cachorro;
+import aula_10_07__PrimeiraTela.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -55,7 +56,7 @@ public class CRUDCachorro {
 
         for (Cachorro a : listaCachorrosBD) {
             if (id == a.getId()) {
-                a.setNome(nome);
+                a.setNomeDoCachorro(nome);
                 alterou = true;
                 break;
             }
@@ -84,7 +85,7 @@ public class CRUDCachorro {
 
     public Cachorro pesquisarPorNome(String nome) {
         for (Cachorro animal : listaCachorrosBD) {
-            if (animal.getNome().equalsIgnoreCase(nome)) {
+            if (animal.getNomeDoCachorro().equalsIgnoreCase(nome)) {
                 return animal;
             }
         }
@@ -95,8 +96,8 @@ public class CRUDCachorro {
         listaCachorrosAuxiliar = new ArrayList<>();
 
         for (Cachorro animal : listaCachorrosBD) {
-            if (animal.getNome().toLowerCase().contains(nome)
-                    || animal.getNome().toUpperCase().contains(nome)) {
+            if (animal.getNomeDoCachorro().toLowerCase().contains(nome)
+                    || animal.getNomeDoCachorro().toUpperCase().contains(nome)) {
                 listaCachorrosAuxiliar.add(animal);
                 animal.printa();
             }
@@ -130,7 +131,7 @@ public class CRUDCachorro {
 
     public boolean temEsteCachorroNome(String nome) {
         for (Cachorro cachorro : listaCachorrosBD) {
-            if (nome.equalsIgnoreCase(cachorro.getNome())) {
+            if (nome.equalsIgnoreCase(cachorro.getNomeDoCachorro())) {
                 return true;
             }
         }
@@ -146,18 +147,24 @@ public class CRUDCachorro {
     public String validarDados(Cachorro cachorro) {
         System.out.println("-- entrou no validar");
 
-        if (cachorro.getNome().isEmpty()) {
+        if (cachorro.getNomeDoCachorro().isEmpty()) {
             return "Insira um nome para o cachorro";
 
-        } else if (cachorro.getNome().matches("a-zA-Z")) {
+        } else if (!Utils.validarLetras(cachorro.getNomeDoCachorro())) {
             return "O nome do animal contém caracteres inválidos";
 
         } else if (temEsteCachorroID(cachorro.getId())) {
             return "Já existe um cachorro com este ID";
 
-        } else if (temEsteCachorroNome(cachorro.getNome())) {
+        } else if (temEsteCachorroNome(cachorro.getNomeDoCachorro())) {
             return "Já existe um cachorro com este nome";
-
+            
+        } else if (cachorro.getNomeDoDono().isEmpty()) {
+            return "Insira um nome para o (a) dono (a)";
+            
+        } else if (Utils.validarNumeros(cachorro.getNomeDoDono())) {
+            return "O nome do dono contém caracteres inválidos";
+            
         }
         return "";
 

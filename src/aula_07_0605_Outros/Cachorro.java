@@ -6,6 +6,7 @@
 package aula_07_0605_Outros;
 
 import aula_09_07__Interface_ClasseAbstrata.crud.Raca;
+import aula_09_07__Interface_ClasseAbstrata.crud.Sexo;
 
 /**
  *
@@ -14,44 +15,45 @@ import aula_09_07__Interface_ClasseAbstrata.crud.Raca;
 public class Cachorro {
 
     private int id;
-    private String nome;
+    private String nomeDoCachorro;
     private String nomeDoDono;
-    private int idade;
-    private char sexo;
+    private double idade;
+    private Sexo sexo;
     private Raca raca;
-    
+
     /**
-     * 
+     *
      * @param id
      * @param nome
      * @param raca
      * @param nomeDoDono
      * @param idade
-     * @param sexo 
+     * @param sexo
      */
-    public Cachorro(String nome, int id, Raca raca, String nomeDoDono, int idade, char sexo) {
+    public Cachorro(String nome, int id, Raca raca, String nomeDoDono, double idade, Sexo sexo) {
         this.id = id;
-        this.nome = nome;
+        this.nomeDoCachorro = nome;
         this.raca = raca;
         this.nomeDoDono = nomeDoDono;
         this.idade = idade;
         this.sexo = sexo;
     }
-    
+
     public void fazBuracos() {
         System.out.println("-- fazendo buraco --");
     }
-    
+
     public void emitirSom() {
         System.out.println("-- latindo --");
     }
 
     public void printa() {
-        System.out.println(getNome() + ", o cachorro");
+        System.out.println(getNomeDoCachorro() + ", o cachorro");
     }
 
+    @Override
     public String toString() {
-        return "Cachorro{" + getId() + "::" + getNome() + '}';
+        return "Cachorro{" + id + " :: " + nomeDoCachorro + " :: " + raca + " :: " + nomeDoDono + " :: " + idade + " :: " + sexo + '}';
     }
 
     public int getId() {
@@ -62,12 +64,12 @@ public class Cachorro {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeDoCachorro() {
+        return nomeDoCachorro;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeDoCachorro(String nomeDoCachorro) {
+        this.nomeDoCachorro = nomeDoCachorro;
     }
 
     public String getNomeDoDono() {
@@ -78,21 +80,24 @@ public class Cachorro {
         this.nomeDoDono = nomeDoDono;
     }
 
-    public int getIdade() {
+    public double getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(double idade) {
         this.idade = idade;
     }
 
-    public char getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
-    
-    
+
+    public Raca getRaca() {
+        return raca;
+    }
+
 }
